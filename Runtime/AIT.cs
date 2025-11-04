@@ -66,23 +66,6 @@ namespace AppsInToss
         }
 
         /// <summary>
-        /// 배너 광고 표시
-        /// </summary>
-        /// <param name="options">광고 옵션</param>
-        public static void ShowBannerAd(BannerAdOptions options)
-        {
-            AITSDKManagerHandler.Instance.ShowBannerAd(options);
-        }
-
-        /// <summary>
-        /// 배너 광고 숨김
-        /// </summary>
-        public static void HideBannerAd()
-        {
-            AITSDKManagerHandler.Instance.HideBannerAd();
-        }
-
-        /// <summary>
         /// 전면 광고 표시
         /// </summary>
         /// <param name="options">광고 옵션</param>
@@ -800,25 +783,12 @@ namespace AppsInToss
     }
 
     /// <summary>
-    /// 배너 광고 옵션
-    /// </summary>
-    [System.Serializable]
-    public class BannerAdOptions
-    {
-        public string adUnitId;
-        public BannerAdPosition position = BannerAdPosition.Bottom;
-        public Action<BaseResult> onLoaded;
-        public Action<BaseResult> onFailedToLoad;
-        public Action onClicked;
-    }
-
-    /// <summary>
     /// 전면 광고 옵션
     /// </summary>
     [System.Serializable]
     public class InterstitialAdOptions
     {
-        public string adUnitId;
+        public string adGroupId;  // Apps in Toss 광고 그룹 ID
         public Action<BaseResult> onLoaded;
         public Action<BaseResult> onFailedToLoad;
         public Action onShown;
@@ -832,7 +802,7 @@ namespace AppsInToss
     [System.Serializable]
     public class RewardedAdOptions
     {
-        public string adUnitId;
+        public string adGroupId;  // Apps in Toss 광고 그룹 ID
         public Action<BaseResult> onLoaded;
         public Action<BaseResult> onFailedToLoad;
         public Action onShown;
@@ -1510,7 +1480,7 @@ namespace AppsInToss
         public float timestamp;
         public float uptime;
         public PerformanceMetrics metrics;
-        public SystemInfo systemInfo;
+        public AitSystemInfo systemInfo;
         public PerformanceEntries performanceEntries;
         public PerformanceRecommendation[] recommendations;
     }
@@ -1589,7 +1559,7 @@ namespace AppsInToss
     /// 시스템 정보
     /// </summary>
     [System.Serializable]
-    public class SystemInfo
+    public class AitSystemInfo
     {
         public string userAgent;
         public string platform;
@@ -1718,12 +1688,6 @@ namespace AppsInToss
         Medium,
         High,
         Original
-    }
-
-    public enum BannerAdPosition
-    {
-        Top,
-        Bottom
     }
 
     /// <summary>

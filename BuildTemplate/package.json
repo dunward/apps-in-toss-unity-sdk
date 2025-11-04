@@ -1,0 +1,11 @@
+{
+  "name": "unity-ait-build",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "archiver": "^6.0.0"
+  }
+}

@@ -119,7 +119,7 @@ public static void ShowBannerAd(BannerAdOptions options)
 **예제:**
 ```csharp
 AIT.ShowBannerAd(new BannerAdOptions {
-    adUnitId = "banner_ad_unit_id",
+    adGroupId = "banner_ad_unit_id",
     position = BannerAdPosition.Bottom,
     onLoaded = (result) => Debug.Log("배너 광고 로드 완료"),
     onFailedToLoad = (error) => Debug.LogError($"배너 광고 로드 실패: {error.message}"),
@@ -144,7 +144,7 @@ public static void ShowRewardedAd(RewardedAdOptions options)
 **예제:**
 ```csharp
 AIT.ShowRewardedAd(new RewardedAdOptions {
-    adUnitId = "rewarded_ad_unit_id",
+    adGroupId = "rewarded_ad_unit_id",
     onLoaded = (result) => Debug.Log("보상형 광고 로드 완료"),
     onRewarded = (reward) => {
         Debug.Log($"보상 획득: {reward.rewardType} x{reward.rewardAmount}");

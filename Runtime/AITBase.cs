@@ -14,97 +14,97 @@ namespace AppsInToss
     {
         // JavaScript 플러그인 함수들
         [DllImport("__Internal")]
-        protected static extern void aitInit(string gameObject, string callback);
+        internal static extern void aitInit(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitLogin(string options);
+        internal static extern void aitLogin(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitLogout(string gameObject, string callback);
+        internal static extern void aitLogout(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetUserInfo(string gameObject, string callback);
+        internal static extern void aitGetUserInfo(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitRequestPayment(string options);
+        internal static extern void aitRequestPayment(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShowBannerAd(string options);
+        internal static extern void aitLoadInterstitialAd(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitHideBannerAd();
+        internal static extern void aitShowInterstitialAd(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShowInterstitialAd(string options);
+        internal static extern void aitLoadRewardedAd(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShowRewardedAd(string options);
+        internal static extern void aitShowRewardedAd(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitSetStorageData(string key, string value, string gameObject, string callback);
+        internal static extern void aitSetStorageData(string key, string value, string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetStorageData(string key, string gameObject, string callback);
+        internal static extern void aitGetStorageData(string key, string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitRemoveStorageData(string key, string gameObject, string callback);
+        internal static extern void aitRemoveStorageData(string key, string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitShareText(string options);
+        internal static extern void aitShareText(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShareLink(string options);
+        internal static extern void aitShareLink(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShareImage(string options);
+        internal static extern void aitShareImage(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitVibrate(int type);
+        internal static extern void aitVibrate(int type);
 
         [DllImport("__Internal")]
-        protected static extern void aitShowToast(string options);
+        internal static extern void aitShowToast(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitShowDialog(string options);
+        internal static extern void aitShowDialog(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetNetworkType(string gameObject, string callback);
+        internal static extern void aitGetNetworkType(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetDeviceInfo(string gameObject, string callback);
+        internal static extern void aitGetDeviceInfo(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetLocation(string options);
+        internal static extern void aitGetLocation(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitTakePhoto(string options);
+        internal static extern void aitTakePhoto(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitChooseImage(string options);
+        internal static extern void aitChooseImage(string options);
 
         [DllImport("__Internal")]
-        protected static extern void aitSetClipboardText(string text, string gameObject, string callback);
+        internal static extern void aitSetClipboardText(string text, string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitGetClipboardText(string gameObject, string callback);
+        internal static extern void aitGetClipboardText(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitTrackEvent(string eventName, string parameters);
+        internal static extern void aitTrackEvent(string eventName, string parameters);
 
         [DllImport("__Internal")]
-        protected static extern void aitSetUserProperties(string properties);
+        internal static extern void aitSetUserProperties(string properties);
 
         [DllImport("__Internal")]
-        protected static extern void aitRequestAppReview(string gameObject, string callback);
+        internal static extern void aitRequestAppReview(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitOpenURL(string url, string gameObject, string callback);
+        internal static extern void aitOpenURL(string url, string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitCheckAppVersion(string gameObject, string callback);
+        internal static extern void aitCheckAppVersion(string gameObject, string callback);
 
         [DllImport("__Internal")]
-        protected static extern void aitRequestPermission(string permission, string gameObject, string callback);
+        internal static extern void aitRequestPermission(string permission, string gameObject, string callback);
 
         /// <summary>
         /// JavaScript 객체를 JSON 문자열로 변환
@@ -117,7 +117,7 @@ namespace AppsInToss
         /// <summary>
         /// JSON 문자열을 객체로 변환
         /// </summary>
-        protected static T FromJson<T>(string json)
+        public static T FromJson<T>(string json)
         {
             try
             {
@@ -133,7 +133,7 @@ namespace AppsInToss
         /// <summary>
         /// Dictionary를 JSON 문자열로 변환
         /// </summary>
-        protected static string DictionaryToJson(Dictionary<string, object> dict)
+        public static string DictionaryToJson(Dictionary<string, object> dict)
         {
             if (dict == null || dict.Count == 0)
                 return "{}";
@@ -180,7 +180,7 @@ namespace AppsInToss
         /// <summary>
         /// 성공 결과 생성
         /// </summary>
-        protected static BaseResult CreateSuccessResult(string message = "Success")
+        public static BaseResult CreateSuccessResult(string message = "Success")
         {
             return new BaseResult
             {
@@ -368,59 +368,46 @@ namespace AppsInToss
 #endif
         }
 
-        public void ShowBannerAd(BannerAdOptions options)
+        public void LoadInterstitialAd(InterstitialAdOptions options)
         {
-            string optionsJson = JsonUtility.ToJson(new
+            var jsOptions = new JSAdOptions
             {
-                adUnitId = options.adUnitId,
-                position = options.position.ToString(),
+                adGroupId = options.adGroupId,
                 gameObject = gameObject.name,
                 loadedCallback = RegisterCallback(options.onLoaded),
-                failedCallback = RegisterCallback(options.onFailedToLoad),
-                clickedCallback = RegisterCallback(options.onClicked)
-            });
+                failedCallback = RegisterCallback(options.onFailedToLoad)
+            };
+            string optionsJson = JsonUtility.ToJson(jsOptions);
+            Debug.Log($"[AIT Unity] LoadInterstitialAd JSON: {optionsJson}");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
-            AITBase.aitShowBannerAd(optionsJson);
-#else
-            // Editor에서는 가짜 성공 응답
-            if (options.onLoaded != null)
-            {
-                options.onLoaded(AITBase.CreateSuccessResult("Banner ad loaded (Editor mode)"));
-            }
-#endif
-        }
-
-        public void HideBannerAd()
-        {
-#if UNITY_WEBGL && !UNITY_EDITOR
-            AITBase.aitHideBannerAd();
-#else
-            Debug.Log("Banner ad hidden (Editor mode)");
-#endif
-        }
-
-        public void ShowInterstitialAd(InterstitialAdOptions options)
-        {
-            string optionsJson = JsonUtility.ToJson(new
-            {
-                adUnitId = options.adUnitId,
-                gameObject = gameObject.name,
-                loadedCallback = RegisterCallback(options.onLoaded),
-                failedCallback = RegisterCallback(options.onFailedToLoad),
-                shownCallback = RegisterCallback(options.onShown),
-                closedCallback = RegisterCallback(options.onClosed),
-                clickedCallback = RegisterCallback(options.onClicked)
-            });
-
-#if UNITY_WEBGL && !UNITY_EDITOR
-            AITBase.aitShowInterstitialAd(optionsJson);
+            AITBase.aitLoadInterstitialAd(optionsJson);
 #else
             // Editor에서는 가짜 응답
             if (options.onLoaded != null)
             {
                 options.onLoaded(AITBase.CreateSuccessResult("Interstitial ad loaded (Editor mode)"));
             }
+#endif
+        }
+
+        public void ShowInterstitialAd(InterstitialAdOptions options)
+        {
+            var jsOptions = new JSAdOptions
+            {
+                adGroupId = options.adGroupId,
+                gameObject = gameObject.name,
+                shownCallback = RegisterCallback(options.onShown),
+                closedCallback = RegisterCallback(options.onClosed),
+                clickedCallback = RegisterCallback(options.onClicked)
+            };
+            string optionsJson = JsonUtility.ToJson(jsOptions);
+            Debug.Log($"[AIT Unity] ShowInterstitialAd JSON: {optionsJson}");
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+            AITBase.aitShowInterstitialAd(optionsJson);
+#else
+            // Editor에서는 가짜 응답
             if (options.onShown != null)
             {
                 options.onShown();
@@ -432,27 +419,46 @@ namespace AppsInToss
 #endif
         }
 
-        public void ShowRewardedAd(RewardedAdOptions options)
+        public void LoadRewardedAd(RewardedAdOptions options)
         {
-            string optionsJson = JsonUtility.ToJson(new
+            var jsOptions = new JSAdOptions
             {
-                adUnitId = options.adUnitId,
+                adGroupId = options.adGroupId,
                 gameObject = gameObject.name,
                 loadedCallback = RegisterCallback(options.onLoaded),
-                failedCallback = RegisterCallback(options.onFailedToLoad),
+                failedCallback = RegisterCallback(options.onFailedToLoad)
+            };
+            string optionsJson = JsonUtility.ToJson(jsOptions);
+            Debug.Log($"[AIT Unity] LoadRewardedAd JSON: {optionsJson}");
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+            AITBase.aitLoadRewardedAd(optionsJson);
+#else
+            // Editor에서는 가짜 응답
+            if (options.onLoaded != null)
+            {
+                options.onLoaded(AITBase.CreateSuccessResult("Rewarded ad loaded (Editor mode)"));
+            }
+#endif
+        }
+
+        public void ShowRewardedAd(RewardedAdOptions options)
+        {
+            var jsOptions = new JSAdOptions
+            {
+                adGroupId = options.adGroupId,
+                gameObject = gameObject.name,
                 shownCallback = RegisterCallback(options.onShown),
                 rewardedCallback = RegisterCallback(options.onRewarded),
                 closedCallback = RegisterCallback(options.onClosed)
-            });
+            };
+            string optionsJson = JsonUtility.ToJson(jsOptions);
+            Debug.Log($"[AIT Unity] ShowRewardedAd JSON: {optionsJson}");
 
 #if UNITY_WEBGL && !UNITY_EDITOR
             AITBase.aitShowRewardedAd(optionsJson);
 #else
             // Editor에서는 가짜 보상 지급
-            if (options.onLoaded != null)
-            {
-                options.onLoaded(AITBase.CreateSuccessResult("Rewarded ad loaded (Editor mode)"));
-            }
             if (options.onShown != null)
             {
                 options.onShown();
@@ -928,6 +934,55 @@ namespace AppsInToss
 #endif
         }
 
+        // Audio System APIs
+        public int CreateAudioContext(AudioContextOptions options) { Debug.Log("CreateAudioContext (Editor mode)"); return 0; }
+        public void SetAudioSource(int audioId, string src) { Debug.Log($"SetAudioSource (Editor mode): {audioId}, {src}"); }
+        public void PlayAudio(int audioId) { Debug.Log($"PlayAudio (Editor mode): {audioId}"); }
+        public void PauseAudio(int audioId) { Debug.Log($"PauseAudio (Editor mode): {audioId}"); }
+        public void StopAudio(int audioId) { Debug.Log($"StopAudio (Editor mode): {audioId}"); }
+        public void SetAudioVolume(int audioId, float volume) { Debug.Log($"SetAudioVolume (Editor mode): {audioId}, {volume}"); }
+        public void SetAudioLoop(int audioId, bool loop) { Debug.Log($"SetAudioLoop (Editor mode): {audioId}, {loop}"); }
+        public void DestroyAudio(int audioId) { Debug.Log($"DestroyAudio (Editor mode): {audioId}"); }
+        public void PlayBackgroundMusic(BackgroundMusicOptions options) { Debug.Log($"PlayBackgroundMusic (Editor mode): {options.src}"); }
+        public void PauseBackgroundMusic() { Debug.Log("PauseBackgroundMusic (Editor mode)"); }
+        public void ResumeBackgroundMusic() { Debug.Log("ResumeBackgroundMusic (Editor mode)"); }
+        public void StopBackgroundMusic() { Debug.Log("StopBackgroundMusic (Editor mode)"); }
+        public void SetBackgroundMusicVolume(float volume) { Debug.Log($"SetBackgroundMusicVolume (Editor mode): {volume}"); }
+
+        // File System APIs
+        public void InitFileSystem(FileSystemOptions options) { Debug.Log("InitFileSystem (Editor mode)"); }
+        public void WriteFile(WriteFileOptions options) { Debug.Log($"WriteFile (Editor mode): {options.filePath}"); }
+        public void ReadFile(ReadFileOptions options) { Debug.Log($"ReadFile (Editor mode): {options.filePath}"); }
+        public void UnlinkFile(UnlinkFileOptions options) { Debug.Log($"UnlinkFile (Editor mode): {options.filePath}"); }
+        public void CopyFile(CopyFileOptions options) { Debug.Log($"CopyFile (Editor mode): {options.srcPath} -> {options.destPath}"); }
+        public void GetFileStats(FileStatsOptions options) { Debug.Log($"GetFileStats (Editor mode): {options.filePath}"); }
+        public void MkDir(MkDirOptions options) { Debug.Log($"MkDir (Editor mode): {options.dirPath}"); }
+        public void ReadDir(ReadDirOptions options) { Debug.Log($"ReadDir (Editor mode): {options.dirPath}"); }
+        public void GetStorageInfo(StorageInfoOptions options) { Debug.Log("GetStorageInfo (Editor mode)"); }
+        public void ClearCache(ClearCacheOptions options) { Debug.Log("ClearCache (Editor mode)"); }
+
+        // Sensors APIs
+        public void StartAccelerometer(AccelerometerOptions options) { Debug.Log("StartAccelerometer (Editor mode)"); }
+        public void StopAccelerometer() { Debug.Log("StopAccelerometer (Editor mode)"); }
+        public void StartGyroscope(GyroscopeOptions options) { Debug.Log("StartGyroscope (Editor mode)"); }
+        public void StopGyroscope() { Debug.Log("StopGyroscope (Editor mode)"); }
+        public void StartCompass(CompassOptions options) { Debug.Log("StartCompass (Editor mode)"); }
+        public void StopCompass() { Debug.Log("StopCompass (Editor mode)"); }
+        public void StartDeviceMotion(DeviceMotionOptions options) { Debug.Log("StartDeviceMotion (Editor mode)"); }
+        public void StopDeviceMotion() { Debug.Log("StopDeviceMotion (Editor mode)"); }
+        public void OnSensorChange(SensorCallbackOptions options) { Debug.Log($"OnSensorChange (Editor mode): {options.sensorType}"); }
+        public void OffSensorChange(SensorCallbackOptions options) { Debug.Log($"OffSensorChange (Editor mode): {options.sensorType}"); }
+        public void CheckSensorPermissions(SensorPermissionOptions options) { Debug.Log("CheckSensorPermissions (Editor mode)"); }
+        public void StopAllSensors() { Debug.Log("StopAllSensors (Editor mode)"); }
+
+        // Performance APIs
+        public void StartPerformanceMonitoring(PerformanceMonitorOptions options) { Debug.Log("StartPerformanceMonitoring (Editor mode)"); }
+        public void StopPerformanceMonitoring() { Debug.Log("StopPerformanceMonitoring (Editor mode)"); }
+        public void GetPerformanceReport(PerformanceReportOptions options) { Debug.Log("GetPerformanceReport (Editor mode)"); }
+        public void ReportCustomMetric(CustomMetricOptions options) { Debug.Log($"ReportCustomMetric (Editor mode): {options.name} = {options.value}"); }
+        public void OnMemoryWarning(MemoryWarningOptions options) { Debug.Log("OnMemoryWarning (Editor mode)"); }
+        public void OnPerformanceEvent(PerformanceEventOptions options) { Debug.Log($"OnPerformanceEvent (Editor mode): {options.eventType}"); }
+
         #endregion
 
         #region Callback Management
@@ -1049,6 +1104,19 @@ namespace AppsInToss
         {
             public string callbackName;
             public string result;
+        }
+
+        [System.Serializable]
+        private class JSAdOptions
+        {
+            public string adGroupId;
+            public string gameObject;
+            public string loadedCallback;
+            public string failedCallback;
+            public string shownCallback;
+            public string closedCallback;
+            public string clickedCallback;
+            public string rewardedCallback;
         }
     }
 }

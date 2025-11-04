@@ -204,7 +204,7 @@ public class GameController : MonoBehaviour
     void ShowRewardedAd()
     {
         AIT.ShowRewardedAd(new RewardedAdOptions {
-            adUnitId = "your_rewarded_ad_id",
+            adGroupId = "your_rewarded_ad_id",
             onRewarded = (reward) => {
                 Debug.Log($"보상 획득: {reward.rewardAmount}");
                 // 보상 지급 로직

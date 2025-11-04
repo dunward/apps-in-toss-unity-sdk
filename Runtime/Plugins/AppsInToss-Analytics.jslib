@@ -358,15 +358,17 @@ var AppsInTossAnalyticsPlugin = {
 // Unity에서 사용할 수 있도록 함수들을 전역에 등록
 mergeInto(LibraryManager.library, AppsInTossAnalyticsPlugin);
 
-// 페이지 로드 완료 후 대기열 처리
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+// 페이지 로드 완료 후 대기열 처리 (브라우저 환경에서만 실행)
+if (typeof document !== 'undefined') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                AppsInTossAnalyticsPlugin.aitFlushAnalyticsQueue();
+            }, 1000);
+        });
+    } else {
         setTimeout(function() {
             AppsInTossAnalyticsPlugin.aitFlushAnalyticsQueue();
         }, 1000);
-    });
-} else {
-    setTimeout(function() {
-        AppsInTossAnalyticsPlugin.aitFlushAnalyticsQueue();
-    }, 1000);
+    }
 }
