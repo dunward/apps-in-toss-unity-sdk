@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -21,7 +24,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetDeviceId()
+#else
         public static async Task<string> GetDeviceId()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -47,7 +54,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetLocale()
+#else
         public static async Task<string> GetLocale()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -73,7 +84,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<NetworkStatus> GetNetworkStatus()
+#else
         public static async Task<NetworkStatus> GetNetworkStatus()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<NetworkStatus>();
@@ -99,7 +114,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetOperationalEnvironment()
+#else
         public static async Task<string> GetOperationalEnvironment()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -125,7 +144,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetPlatformOS()
+#else
         public static async Task<string> GetPlatformOS()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -151,7 +174,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetSchemeUri()
+#else
         public static async Task<string> GetSchemeUri()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -177,7 +204,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("SystemInfo")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> GetTossAppVersion()
+#else
         public static async Task<string> GetTossAppVersion()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
