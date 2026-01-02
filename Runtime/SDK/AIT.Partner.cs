@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -23,7 +26,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Partner")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable partnerAddAccessoryButton(AddAccessoryButtonOptions args_0)
+#else
         public static async Task partnerAddAccessoryButton(AddAccessoryButtonOptions args_0)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
@@ -51,7 +58,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Partner")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable partnerRemoveAccessoryButton()
+#else
         public static async Task partnerRemoveAccessoryButton()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
