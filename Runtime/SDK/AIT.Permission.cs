@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -21,7 +24,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Permission")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<PermissionStatus> GetPermission(GetPermissionPermission permission)
+#else
         public static async Task<PermissionStatus> GetPermission(GetPermissionPermission permission)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<PermissionStatus>();
@@ -47,7 +54,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Permission")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> OpenPermissionDialog(OpenPermissionDialogPermission permission)
+#else
         public static async Task<string> OpenPermissionDialog(OpenPermissionDialogPermission permission)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -73,7 +84,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Permission")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> RequestPermission(RequestPermissionPermission permission)
+#else
         public static async Task<string> RequestPermission(RequestPermissionPermission permission)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
