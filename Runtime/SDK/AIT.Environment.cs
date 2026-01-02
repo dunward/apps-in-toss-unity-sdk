@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -20,7 +23,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Environment")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<string> envGetDeploymentId()
+#else
         public static async Task<string> envGetDeploymentId()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<string>();
@@ -45,7 +52,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Environment")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<AppsInTossGlobals> GetAppsInTossGlobals()
+#else
         public static async Task<AppsInTossGlobals> GetAppsInTossGlobals()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<AppsInTossGlobals>();
@@ -72,7 +83,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Environment")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<bool> IsMinVersionSupported(IsMinVersionSupportedMinVersions minVersions)
+#else
         public static async Task<bool> IsMinVersionSupported(IsMinVersionSupportedMinVersions minVersions)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
