@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -74,7 +77,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("IAP")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<IAPGetProductItemListResult> IAPGetProductItemList()
+#else
         public static async Task<IAPGetProductItemListResult> IAPGetProductItemList()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<IAPGetProductItemListResult>();
@@ -102,7 +109,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("IAP")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<IAPGetPendingOrdersResult> IAPGetPendingOrders()
+#else
         public static async Task<IAPGetPendingOrdersResult> IAPGetPendingOrders()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<IAPGetPendingOrdersResult>();
@@ -130,7 +141,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("IAP")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<CompletedOrRefundedOrdersResult> IAPGetCompletedOrRefundedOrders()
+#else
         public static async Task<CompletedOrRefundedOrdersResult> IAPGetCompletedOrRefundedOrders()
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<CompletedOrRefundedOrdersResult>();
@@ -158,7 +173,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("IAP")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<bool> IAPCompleteProductGrant(IAPCompleteProductGrantArgs_0 args_0)
+#else
         public static async Task<bool> IAPCompleteProductGrant(IAPCompleteProductGrantArgs_0 args_0)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
