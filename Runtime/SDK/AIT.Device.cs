@@ -9,6 +9,9 @@ using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using UnityEngine.Scripting;
+#if UNITY_6000_0_OR_NEWER
+using UnityEngine;
+#endif
 
 namespace AppsInToss
 {
@@ -20,7 +23,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Device")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable GenerateHapticFeedbackAsync(HapticFeedbackOptions options)
+#else
         public static async Task GenerateHapticFeedback(HapticFeedbackOptions options)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
@@ -47,7 +54,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Device")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable SetDeviceOrientationAsync(SetDeviceOrientationOptions options)
+#else
         public static async Task SetDeviceOrientation(SetDeviceOrientationOptions options)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
@@ -73,7 +84,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Device")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable SetIosSwipeGestureEnabledAsync(SetIosSwipeGestureEnabledOptions options)
+#else
         public static async Task SetIosSwipeGestureEnabled(SetIosSwipeGestureEnabledOptions options)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<bool>();
@@ -100,7 +115,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Device")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<SetScreenAwakeModeResult> SetScreenAwakeModeAsync(SetScreenAwakeModeOptions options)
+#else
         public static async Task<SetScreenAwakeModeResult> SetScreenAwakeMode(SetScreenAwakeModeOptions options)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<SetScreenAwakeModeResult>();
@@ -127,7 +146,11 @@ namespace AppsInToss
         /// <exception cref="AITException">Thrown when the API call fails</exception>
         [Preserve]
         [APICategory("Device")]
+#if UNITY_6000_0_OR_NEWER
+        public static async Awaitable<SetSecureScreenResult> SetSecureScreenAsync(SetSecureScreenOptions options)
+#else
         public static async Task<SetSecureScreenResult> SetSecureScreen(SetSecureScreenOptions options)
+#endif
         {
 #if UNITY_WEBGL && !UNITY_EDITOR
             var tcs = new TaskCompletionSource<SetSecureScreenResult>();
